@@ -15,11 +15,21 @@ function getFlattenedListOfAccounts(section: ReportSection): Account[] {
     ...section.nestedSection[0].nestedSection[0].nestedSection[0].accounts]
 }
 
+function getAverageAccountBalance(accounts: Account[]):number {
+  let balance = 0;
+
+  accounts.forEach(acc => {
+    balance += acc.value;
+  })
+
+  return balance / accounts.length;
+}
+
 function CalculateAccountTotals(accounts: Account[]): ReportAccountTotals {
   return {
     highest_account_name: accounts.sort((a,b) => b.value - a.value).map(acc => a.name)[0] || "",
     lowest_account: accounts.sort((a,b) => a.value - b.value).map(acc => a.name)[0] || "",
-    average: 0
+    average: getAverageAccountBalance(accounts)
   }
 };
 
@@ -33,3 +43,4 @@ function main(): ReportAccountTotals {
 
   return CalculateAccountTotals(accounts);
 }
+
