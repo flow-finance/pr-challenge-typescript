@@ -1,3 +1,21 @@
+export interface CashBalanceReport {
+  companyId: string
+  id: string
+  assets: ReportSection
+  liabilitiesAndEquity: ReportSection
+}
+
+export interface ReportSection {
+  nestedSection?: ReportSection[]
+  accounts?: Account[]
+}
+
+export interface Account {
+  name: string
+  externalId: string
+  value: number
+}
+
 export default {
   "companyId": "192a14fe-5941-4dbf-8dc1-16503f3242fb",
   "id": "2021-12-01",
